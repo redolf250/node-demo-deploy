@@ -1,21 +1,19 @@
 pipeline {
-    agent {
-       node{
-         label "ubuntu"
-       }
-    }
+    agent { label "ubuntu" }
     stages {
         stage("Clone Repository") {
             steps {
                 script {
-
-                    checkout scmGit(
+                    checkout([
+                        $class: 'GitSCM',
                         branches: [[name: '*/main']],
-                        extensions: [], 
+                        extensions: [],
                         userRemoteConfigs: [[url: 'https://github.com/redolf250/node-demo-deploy.git']]
-                    )
-
+                    ])
+                    
+                    // Check the current directory after cloning
                     sh 'pwd'
+                    sh 'ls -l'
                 }
             }
         }
@@ -23,13 +21,19 @@ pipeline {
         stage("Install Node Packages and Start") {
             steps {
                 script {
+                    // Navigate to the correct directory and run commands
                     sh '''
-                        cd node-demo-deploy
+                        cd node-demo-deploy || exit 1
                         npm install
                         npm start
                     '''
                 }
-                echo "Hello, this should be your success story"
+            }
+        }
+
+        stage("Confirmation Message") {
+            steps {
+                echo "Hello, this should be your success story!"
             }
         }
     }
