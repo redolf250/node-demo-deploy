@@ -23,7 +23,6 @@ pipeline {
                 script {
                     // Navigate to the correct directory and run commands
                     sh '''
-                        cd node-demo-deploy || exit 1
                         npm install
                         npm start
                     '''
