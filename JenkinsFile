@@ -10,7 +10,7 @@ pipeline {
                 script {
 
                     checkout scmGit(
-                        branches: [[name: '*/master']],
+                        branches: [[name: '*/main']],
                         extensions: [], 
                         userRemoteConfigs: [[url: 'https://github.com/redolf250/node-demo-deploy.git']]
                     )
@@ -22,6 +22,7 @@ pipeline {
             steps {
                 script {
                     sh '''
+                        cd node-demo-deploy
                         npm install
                         npm start
                     '''
