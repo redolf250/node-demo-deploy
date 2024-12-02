@@ -14,6 +14,8 @@ pipeline {
                         extensions: [], 
                         userRemoteConfigs: [[url: 'https://github.com/redolf250/node-demo-deploy.git']]
                     )
+
+                    sh 'pwd'
                 }
             }
         }
