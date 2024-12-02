@@ -29,11 +29,5 @@ pipeline {
                 }
             }
         }
-
-        stage("Confirmation Message") {
-            steps {
-                echo "Hello, this should be your success story!"
-            }
-        }
     }
 }
