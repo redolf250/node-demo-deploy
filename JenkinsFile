@@ -1,6 +1,8 @@
 pipeline {
     agent {
-        label "ubuntu"
+       node{
+         label "ubuntu"
+       }
     }
     stages {
         stage("Clone Repository") {
