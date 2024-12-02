@@ -10,7 +10,7 @@ pipeline {
                 script {
 
                     checkout scmGit(
-                        branches: [[name: '*/main']],
+                        branches: [[name: '*/master']],
                         extensions: [], 
                         userRemoteConfigs: [[url: 'https://github.com/redolf250/node-demo-deploy.git']]
                     )
