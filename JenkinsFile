@@ -24,9 +24,10 @@ pipeline {
                 script {
                     // Navigate to the correct directory and run commands
                     //pm2 restart sample-api
+                    //pm2 start ecosystem.config.js --env development
                     sh '''
                         npm install
-                        pm2 start ecosystem.config.js --env development
+                        pm2 restart sample-api
                         pm2 save
                     '''
                 }
