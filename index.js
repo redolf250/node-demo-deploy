@@ -1,6 +1,14 @@
 const express = require('express');
 const app = express();
-const PORT = 3000;
+const PORT = 4000;
+let envFilePath = process.env.NODE_ENV 
+  ? `./environment/.env.${process.env.NODE_ENV}` 
+  : `./environment/.env`;
+
+require('dotenv').config({path: envFilePath});
+
+const env = process.env.NODE_ENV
+
 
 // Middleware to parse JSON
 app.use(express.json());
@@ -26,5 +34,6 @@ app.post('/api/users', (req, res) => {
 
 // Server listening
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log('Currect env: ' + env)
+    console.log(`Server is running on http://localhost:${process.env.PORT}`);
 });
