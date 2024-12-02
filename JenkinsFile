@@ -8,12 +8,12 @@ pipeline {
         stage("Clone Repository") {
             steps {
                 script {
-                    checkout([
-                        $class: 'GitSCM',
+
+                    checkout scmGit(
                         branches: [[name: '*/main']],
-                        extensions: [],
+                        extensions: [], 
                         userRemoteConfigs: [[url: 'https://github.com/redolf250/node-demo-deploy.git']]
-                    ])
+                    )
                 }
             }
         }
