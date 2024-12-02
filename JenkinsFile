@@ -25,7 +25,6 @@ pipeline {
                     // Navigate to the correct directory and run commands
                     sh '''
                         npm install
-                        npm start
                         pm2 start npm --name "sample-api"
                         pm2 save
                     '''
