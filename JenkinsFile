@@ -1,5 +1,10 @@
 pipeline {
     agent { label "ubuntu" }
+
+    triggers {
+        pollSCM('H/5 * * * *') // Poll SCM every 5 minutes
+    }
+
     stages {
         stage("Clone Repository") {
             steps {
@@ -10,10 +15,6 @@ pipeline {
                         extensions: [],
                         userRemoteConfigs: [[url: 'https://github.com/redolf250/node-demo-deploy.git']]
                     ])
-                    
-                    // Check the current directory after cloning
-                    sh 'pwd'
-                    sh 'ls -l'
                 }
             }
         }
@@ -25,6 +26,7 @@ pipeline {
                     sh '''
                         npm install
                         npm start
+                        pm2 start npm --name "sample-api" run start
                     '''
                 }
             }
