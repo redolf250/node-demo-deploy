@@ -16,19 +16,15 @@ pipeline {
             }
         }
 
-        stage("Install Node Packages && Start") {
-            steps{
-               script {
-                    sh 'cd /home/redolf250/jenkins/workspace/demo'
-                    sh 'npm install'
-                    sh 'npm start'
-               }
-            }
-
-            steps{
-               script {
-                    echo "Hello this should be your success story"
-               }
+        stage("Install Node Packages and Start") {
+            steps {
+                script {
+                    sh '''
+                        npm install
+                        npm start
+                    '''
+                }
+                echo "Hello, this should be your success story"
             }
         }
     }
