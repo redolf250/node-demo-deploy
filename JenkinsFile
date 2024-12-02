@@ -1,23 +1,34 @@
-pipeline{
-    agent{
+pipeline {
+    agent {
         label "ubuntu"
     }
-    stages{
-        stage("checkout"){
-            steps{
-                echo "========executing A========"
+    stages {
+        stage("Clone Repository") {
+            steps {
+                script {
+                    checkout([
+                        $class: 'GitSCM',
+                        branches: [[name: '*/main']],
+                        extensions: [],
+                        userRemoteConfigs: [[url: 'https://github.com/redolf250/node-demo-deploy.git']]
+                    ])
+                }
             }
-        
-            post{
-                always{
-                    echo "========always========"
-                }
-                success{
-                    echo "========A executed successfully========"
-                }
-                failure{
-                    echo "========A execution failed========"
-                }
+        }
+
+        stage("Install Node Packages && Start") {
+            steps{
+               script {
+                    sh 'cd /home/redolf250/jenkins/workspace/demo'
+                    sh 'npm install'
+                    sh 'npm start'
+               }
+            }
+
+            steps{
+               script {
+                    echo "Hello this should be your success story"
+               }
             }
         }
     }
